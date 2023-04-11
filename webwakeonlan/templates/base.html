@@ -1,0 +1,24 @@
+{% load static %}
+<html>
+  <!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Web Wake On Lan" />
+    <meta name="author" content="mka142" />
+    <link rel="stylesheet" href="{% static 'semantic/semantic.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <title>Web Wake On Lan</title>
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <div class="ui center aligned header web-wake-on-lan-title">
+      <a href="{% url 'list_machines' %}">WebWakeOnLan</a>
+    </div>
+    <div class="ui fluid container" style="max-width: 700px !important">
+      {% block body %} {% endblock %}
+    </div>
+  </body>
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <script src="{% static 'semantic/semantic.min.js' %}"></script>
+</html>

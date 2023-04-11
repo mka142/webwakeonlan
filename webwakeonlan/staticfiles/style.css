@@ -1,0 +1,8 @@
+.web-wake-on-lan-title {
+  font-style: italic !important;
+  font-weight: bold !important;
+  font-family: mono !important;
+  font-size: 3rem !important;
+  cursor: pointer !important;
+  padding: 1rem !important;
+}

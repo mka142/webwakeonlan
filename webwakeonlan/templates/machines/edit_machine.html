@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block body %}
+<div class="ui large header">Edit Machine</div>
+<div class="ui basic form segment">
+  {% include 'machines/machine_form.html' %}
+  <a class="ui red button" href="{% url 'delete_machine' machine.id %}">
+    <i class="ui trash icon"></i>
+    Delete Machine
+  </a>
+</div>
+{% endblock %}

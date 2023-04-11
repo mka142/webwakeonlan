@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block body %}
+<div class="ui basic segment">
+  <div class="ui large header">Deleting Machine: {{machine.name}}</div>
+  <div class="ui basic form segment">
+    <form method="post">
+      {% csrf_token %}
+      <div class="ui message">
+        <div class="header">Are you sure?</div>
+        <p>This action cannot be undone.</p>
+      </div>
+     
+        <button class="ui red button" type="submit">Delete</button>
+
+        <a class="ui button" href="{% url 'list_machines' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<form action="." method="post">
+    {% csrf_token %}
+    <div class="field">
+      <label for="{{ form.name.id_for_label}}">
+        {{ form.name.label }} {{ form.name }}
+      </label>
+    </div>
+    <div class="field">
+      <label for="{{ form.description.id_for_label}}">
+        {{ form.description.label }} {{ form.description }}
+      </label>
+    </div>
+    <div class="field">
+      <label for="{{ form.mac_address.id_for_label}}">
+        {{ form.mac_address.label }} {{ form.mac_address }}
+      </label>
+    </div>
+    <div class="field">
+      <label for="{{ form.ip_address.id_for_label}}">
+        {{ form.ip_address.label }} {{ form.ip_address }}
+      </label>
+    </div>
+    <input type="submit" value="Save" class="ui button primary" />
+  </form>

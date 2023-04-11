@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block body %}
+<div class="ui basic segment">
+  <a class="ui secondary button" href="{% url 'new_machine' %}">
+    <i class="ui plus icon"></i>
+    Add Machine
+  </a>
+</div>
+<div class="ui divider"></div>
+<div class="ui divided items padded segment">
+  {% for machine in machines %}
+  <div class="item">
+    <div class="content">
+      <a class="header" href="{% url 'edit_machine' machine.id %}"
+        >{{machine.name}}</a
+      >
+      <div class="meta">
+        {% if machine.last_wake %} Last awake: {{machine.last_wake|date:'Y-m-d H:i'}} {% endif %}
+      </div>
+      <div class="description">
+        <p>{{machine.description}}</p>
+      </div>
+      <div class="extra">
+        <a
+          href="{% url 'awake_machine' machine.id %}"
+          class="ui right floated primary button"
+          >Awake!</a
+        >
+        <div class="ui label">
+          <i class="server icon"></i>
+          {{machine.mac_address}}
+        </div>
+        {% if machine.ip_address %}
+        <div class="ui label">
+          <i class="cloud icon"></i>
+          {{machine.ip_address}}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
