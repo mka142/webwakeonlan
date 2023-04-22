@@ -16,6 +16,8 @@ def new_machine(request):
         if form.is_valid():
             form.save()
             return redirect("list_machines")
+        else:
+            return render(request, "machines/new_machine.html", {"form": form})
     else:
         return render(request, "machines/new_machine.html", {"form": MachineForm()})
 
@@ -48,4 +50,10 @@ def awake_machine(request, pk):
     machine = get_object_or_404(Machine, pk=pk)
 
     machine.awake()
+    return redirect("list_machines")
+
+
+def refresh_machine(request,pk):
+    machine = get_object_or_404(Machine, pk=pk)
+    machine.ping()
     return redirect("list_machines")

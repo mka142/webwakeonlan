@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATA_DIR = Path(os.environ.get("DATA_DIR",BASE_DIR))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-i4o0zwxe*k=0kz0h-k#0=#tt(+ts=zwm9iqalo0st%oa0+vvp$"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG",1))
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 
 # Application definition
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -77,7 +81,7 @@ WSGI_APPLICATION = "webwakeonlan.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": DATA_DIR / "db.sqlite3",
     }
 }
 
@@ -119,6 +123,15 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
+
+STATIC_ROOT = DATA_DIR / "staticfiles"
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

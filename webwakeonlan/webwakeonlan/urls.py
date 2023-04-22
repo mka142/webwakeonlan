@@ -23,6 +23,7 @@ from machines.views import (
     edit_machine,
     delete_machine,
     awake_machine,
+    refresh_machine,
 )
 
 urlpatterns = [
@@ -32,4 +33,5 @@ urlpatterns = [
     path("edit/<int:pk>/", edit_machine, name="edit_machine"),
     path("delete/<int:pk>/", delete_machine, name="delete_machine"),
     path("awake/<int:pk>/", awake_machine, name="awake_machine"),
+    path("refresh/<int:pk>/", refresh_machine, name="refresh_machine"),
 ]

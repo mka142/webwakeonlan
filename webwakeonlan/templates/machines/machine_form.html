@@ -1,24 +1,39 @@
 <form action="." method="post">
-    {% csrf_token %}
-    <div class="field">
-      <label for="{{ form.name.id_for_label}}">
-        {{ form.name.label }} {{ form.name }}
-      </label>
-    </div>
-    <div class="field">
-      <label for="{{ form.description.id_for_label}}">
-        {{ form.description.label }} {{ form.description }}
-      </label>
-    </div>
-    <div class="field">
-      <label for="{{ form.mac_address.id_for_label}}">
-        {{ form.mac_address.label }} {{ form.mac_address }}
-      </label>
-    </div>
-    <div class="field">
-      <label for="{{ form.ip_address.id_for_label}}">
-        {{ form.ip_address.label }} {{ form.ip_address }}
-      </label>
-    </div>
-    <input type="submit" value="Save" class="ui button primary" />
-  </form>
+  {% csrf_token %}
+  <div class="required field">
+    <label for="{{ form.name.id_for_label}}"> {{ form.name.label }} </label>
+    {{ form.name }}
+  </div>
+  <div class="field">
+    <label for="{{ form.description.id_for_label}}">
+      {{ form.description.label }}
+    </label>
+    {{ form.description }}
+  </div>
+  <div class="required field">
+    <label for="{{ form.mac_address.id_for_label}}">
+      {{ form.mac_address.label }}
+    </label>
+    {{ form.mac_address }}
+  </div>
+  <div class="field">
+    <label for="{{ form.ip_address.id_for_label}}">
+      {{ form.ip_address.label }}
+    </label>
+    {{ form.ip_address }}
+  </div>
+  {% if form.errors %}
+  <div class="ui message">
+    <div class="header">Error</div>
+    <ul class="list">
+      {% for field in form %} {% for error in field.errors %}
+      <li>{{ error }}: {{ field.label }}</li>
+      {% endfor %} {% endfor %} {% for error in form.non_field_errors %} 
+      <li>{{ error }}</li>
+
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  <input type="submit" value="Save" class="ui button primary" />
+</form>

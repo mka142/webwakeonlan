@@ -10,34 +10,64 @@
   {% for machine in machines %}
   <div class="item">
     <div class="content">
-      <a class="header" href="{% url 'edit_machine' machine.id %}"
-        >{{machine.name}}</a
+      <div
+        class="header"
+        >{{machine.name}}</div
       >
-      <div class="meta">
-        {% if machine.last_wake %} Last awake: {{machine.last_wake|date:'Y-m-d H:i'}} {% endif %}
-      </div>
       <div class="description">
         <p>{{machine.description}}</p>
-      </div>
-      <div class="extra">
-        <a
-          href="{% url 'awake_machine' machine.id %}"
-          class="ui right floated primary button"
-          >Awake!</a
-        >
-        <div class="ui label">
+
+        <div class="ui large label" data-content="MAC address">
           <i class="server icon"></i>
           {{machine.mac_address}}
         </div>
         {% if machine.ip_address %}
-        <div class="ui label">
+        <div class="ui large label" data-content="IP address">
           <i class="cloud icon"></i>
           {{machine.ip_address}}
         </div>
+
+        <div
+          class="ui large label"
+          data-content="Power status and last ping"
+        >
+          {% if machine.is_active %}
+
+          <i class="green circle icon"></i>
+          Online {% else %}
+          <i class="red circle icon"></i>
+          Offline {% endif %} {% if machine.last_ping %}
+          <span class="detail"> {{machine.last_ping|date:'Y-m-d H:i'}} </span>
+          {% endif %}
+        </div>
+
         {% endif %}
+      </div>
+      <div class="extra">
+        <a
+          data-content="Wake up"
+          href="{% url 'awake_machine' machine.id %}"
+          class="ui right floated primary inverted icon button"
+          ><i class="power off icon"></i
+        ></a>
+        <div class="ui basic buttons">
+          <a data-content="Edit" href="{% url 'edit_machine' machine.id %}" class="ui icon button"
+            ><i class="edit icon"></i
+          ></a>
+          <a data-content="Refresh" href="{% url 'refresh_machine' machine.id %}" class="ui icon button">
+            <i class="ui sync icon"></i
+          ></a>
+        </div>
       </div>
     </div>
   </div>
   {% endfor %}
 </div>
+{% endblock %} {% block scripts %}
+<script>
+  $(document).ready(function () {
+    $(".ui.button").popup({ position: "bottom center" });
+    $(".ui.label").popup({ position: "bottom center" });
+  });
+</script>
 {% endblock %}
