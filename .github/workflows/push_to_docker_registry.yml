@@ -26,7 +26,7 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: mka142/webwakeonlan
-          tag-custom: ${{ VERSION }}
+          tag-custom: ${VERSION}
           tag-semver: |
             {{raw}}
 
@@ -45,4 +45,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webwakeonlan:${{ VERSION }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webwakeonlan:${VERSION}
