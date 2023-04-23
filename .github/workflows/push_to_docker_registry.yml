@@ -49,4 +49,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webwakeonlan:1.0.0
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webwakeonlan:latest
