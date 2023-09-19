@@ -11,6 +11,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 # Section 3- Compiler and OS libraries
 RUN apt-get -y update
+RUN apt-get -y install iputils-ping
 
 # Section 4- Project libraries and User Creation
 COPY ./requirements.txt /tmp/requirements.txt
